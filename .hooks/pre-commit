@@ -1,11 +1,5 @@
 #!/bin/bash
 echo "Running pre-commit checks on your code..."
-STAGED_GO_FILES=$(git diff --cached --name-only | grep ".go$")
-
-if [[ "$STAGED_GO_FILES" = "" ]]; then
-  echo "nothing change, exit pre-commit..."
-  exit 0
-fi
 
 GOLANGCI_LINT=$GOPATH/bin/golangci-lint
 

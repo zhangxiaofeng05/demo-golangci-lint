@@ -1,6 +1,37 @@
 ## install golangci-lint
 https://golangci-lint.run/usage/install/#install-from-source
 
+## usage
+1. first step
+Add the following content to the makefile
+```
+deps:
+	@cp .hooks/* .git/hooks
+
+# golangci-lint
+lint:
+	# how to install: https://golangci-lint.run/usage/install/#install-from-source
+	golangci-lint run ./...
+```
+2. get pre-commit
+```shell
+wget -P .hooks https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/.hooks/pre-commit
+```
+3. get golangci-lint config file
+```
+wget https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/.golangci.yml
+```
+4. Add execution permission to per-commit
+```
+chmod +x .hooks/pre-commit
+```
+5. put pre-commit to .git/hooks
+```shell
+make deps
+```
+
+ok, let us enjoy it!
+
 ## QA
 Q: hook was ignored?
 ```
