@@ -1,4 +1,5 @@
-
+deps:
+	@cp .hooks/* .git/hooks
 
 # golangci-lint
 lint:
