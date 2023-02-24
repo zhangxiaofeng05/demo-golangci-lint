@@ -2,16 +2,15 @@
 https://golangci-lint.run/usage/install/#install-from-source
 
 ## usage
-1. first step
-Add the following content to the makefile
+1. Add the following content to the makefile
 ```
 deps:
 	@cp .hooks/* .git/hooks
 
 # golangci-lint
 lint:
-	# how to install: https://golangci-lint.run/usage/install/#install-from-source
-	golangci-lint run ./...
+	@golangci-lint --version
+	@golangci-lint run ./...	
 ```
 2. get pre-commit
 ```shell
