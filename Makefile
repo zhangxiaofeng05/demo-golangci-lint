@@ -1,4 +1,4 @@
-deps:
+git_hook:
 	@cp .hooks/* .git/hooks
 
 # golangci-lint

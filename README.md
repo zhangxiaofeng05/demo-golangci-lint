@@ -4,7 +4,7 @@ https://golangci-lint.run/usage/install/#install-from-source
 ## usage
 1. Add the following content to the makefile
 ```
-deps:
+git_hook:
 	@cp .hooks/* .git/hooks
 
 # golangci-lint
@@ -26,7 +26,7 @@ chmod +x .hooks/pre-commit
 ```
 5. put pre-commit to .git/hooks
 ```shell
-make deps
+make git_hook
 ```
 
 ok, let us enjoy it!
