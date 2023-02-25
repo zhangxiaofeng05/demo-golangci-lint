@@ -2,6 +2,9 @@
 https://golangci-lint.run/usage/install/#install-from-source
 
 ## usage
+### Bash Installation
+
+### Manual Installation
 1. Add the following content to the makefile
 ```
 git_hook:
@@ -10,7 +13,7 @@ git_hook:
 # golangci-lint
 lint:
 	@golangci-lint --version
-	@golangci-lint run ./...	
+	@golangci-lint run ./...
 ```
 2. get pre-commit
 ```shell
