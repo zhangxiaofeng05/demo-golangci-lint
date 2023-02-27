@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ ! -d .git ]; then
+	echo "Current directory must is a root Git repository."
+	exit 1
+fi
+
 if [ -e ".hooks/pre-commit" ]; then
 	echo ".hooks/pre-commit exist!!!"
 	make git_hook
