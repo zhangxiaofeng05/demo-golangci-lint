@@ -8,6 +8,11 @@ https://golangci-lint.run/usage/install/#install-from-source
 |curl|`sh -c "$(curl -fsSL https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
 |wget|`sh -c "$(wget -O- https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
 
+### Manual lint
+```bash
+make lint
+```
+
 ## QA
 Q: no lint specify code  
 A: https://golangci-lint.run/usage/false-positives/#nolint-directive
