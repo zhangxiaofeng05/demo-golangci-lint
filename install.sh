@@ -1,14 +1,14 @@
 #!/bin/sh
 
 if [ ! -d .git ]; then
-	echo "Current directory must is a root Git repository."
+	echo "The current directory must be a root Git repository."
 	exit 1
 fi
 
 if [ -e ".hooks/pre-commit" ]; then
 	echo ".hooks/pre-commit exist!!!"
 	make git_hook
-	echo "finish run make git_hook, enjoy it!"
+	echo "finish git_hook, you can enjoy it!"
 	exit 1
 fi
 
