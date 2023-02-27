@@ -8,6 +8,8 @@ https://golangci-lint.run/usage/install/#install-from-source
 |curl|`sh -c "$(curl -fsSL https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
 |wget|`sh -c "$(wget -O- https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
 
+more info. [install.sh](./install.sh)
+
 ### Manual lint
 ```bash
 make lint
