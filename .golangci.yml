@@ -20,4 +20,5 @@ linters:
     - ineffassign
     - typecheck
     - unused
+    - sqlclosecheck
 
