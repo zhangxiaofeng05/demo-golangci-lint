@@ -18,7 +18,17 @@ linters:
   enable:
     - errcheck
     - ineffassign
-    - typecheck
-    - unused
-    - sqlclosecheck
+    - staticcheck
+#    - typecheck # 不启用，静态检查有错误时，程序无法运行
+#     - unused # 不启用 有的函数只有特定的情况才会使用
+#    - asasalint
+#    - bodyclose
+#    - contextcheck
+#    - errchkjson
+#    - execinquery
+#    - exportloopref
+#    - gosec
+#    - nilerr
+#    - rowserrcheck
+#    - sqlclosecheck  # Can't create more than max_prepared_stmt_count statements (current value: 16382)
 
