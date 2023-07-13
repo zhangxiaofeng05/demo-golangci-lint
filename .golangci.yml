@@ -19,11 +19,11 @@ linters:
     - errcheck
     - ineffassign
     - staticcheck
-#    - typecheck # 不启用，静态检查有错误时，程序无法运行
-#     - unused # 不启用 有的函数只有特定的情况才会使用
-#    - asasalint
-#    - bodyclose
-#    - contextcheck
+    - typecheck # 静态检查有错误时，程序无法运行；但是测试代码出现错误时不影响运行
+#    - unused # 不启用 有的函数只有特定的情况才会使用
+    - bodyclose
+    - contextcheck # 检查函数是否使用上下文的context,应该用存在继承关系的context向下传递
+    - durationcheck # 检查两个持续时间相乘
 #    - errchkjson
 #    - execinquery
 #    - exportloopref

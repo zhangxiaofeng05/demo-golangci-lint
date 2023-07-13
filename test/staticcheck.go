@@ -1,7 +1,8 @@
 package main
 
-import "context"
+import "strings"
 
-// https://staticcheck.dev/docs/checks#SA1012
-func staticcheck(_ context.Context) {
+func staticcheck(a, b string) bool {
+	return strings.ToUpper(a) == strings.ToUpper(b)
+	//return strings.EqualFold(a, b)
 }
