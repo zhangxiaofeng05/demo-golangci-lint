@@ -5,12 +5,12 @@ import (
 	"log"
 )
 
-func contextcheck(ctx context.Context) {
+func contextcheck(_ context.Context) {
 	// 设置超时时间
 	//service(ctx)
 	service(context.Background())
 }
 
-func service(ctx context.Context) {
+func service(_ context.Context) {
 	log.Println("contextcheck test")
 }

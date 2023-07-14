@@ -6,5 +6,5 @@ import (
 
 func TestTypeCheck(t *testing.T) {
 	//TypeCheck("aa")
-	//TypeCheck(1)
+	TypeCheck(1)
 }

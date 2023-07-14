@@ -16,19 +16,24 @@ linters:
   # Enable specific linter
   # https://golangci-lint.run/usage/linters/#enabled-by-default
   enable:
-    - errcheck
-    - ineffassign
-    - staticcheck
-    - typecheck # 静态检查有错误时，程序无法运行；但是测试代码出现错误时不影响运行
-#    - unused # 不启用 有的函数只有特定的情况才会使用
-    - bodyclose
-    - contextcheck # 检查函数是否使用上下文的context,应该用存在继承关系的context向下传递
-    - durationcheck # 检查两个持续时间相乘
-#    - errchkjson
-#    - execinquery
-#    - exportloopref
-#    - gosec
-#    - nilerr
-#    - rowserrcheck
-#    - sqlclosecheck  # Can't create more than max_prepared_stmt_count statements (current value: 16382)
+    - errcheck # bugs 检查错误是否处理
+    - govet # bugs go原生lint，没有示例
+    - ineffassign # 检测何时未使用对现有变量的赋值
+    - staticcheck # bugs
+    - typecheck # 官方文档已删除 静态检查有错误时，程序无法运行；但是测试代码出现错误时不影响运行
+#    - unused # 检查未使用的函数，变量 不启用 有的函数只有特定的情况才会使用
+    - bodyclose # bugs 检查HTTP响应体是否关闭成功
+#    - contextcheck # bugs 检查函数是否使用上下文的context,应该用存在继承关系的context向下传递 不启用 部分函数不使用context
+    - durationcheck # bugs 检查两个持续时间相乘
+    - errorlint # bugs 错误的处理方式
+    - exportloopref # bugs 检查指向循环变量的指针
+#    - gocheckcompilerdirectives # bugs 检查//go:注释是否正确 暂时不需要 不启用
+#    - gocritic # 提供检查错误、性能和样式问题的诊断 不启用
+    - gosec # bugs 检查源代码是否存在安全问题
+    - makezero # bugs 确保切片不会以非零长度初始化的 linter
+    - musttag # bugs 在(un)marshaled结构体时，强制标识tag
+    - nilerr # bugs 检查当 err 不为 nil 时返回 nil
+    - prealloc # performance 查找可能被预分配的切片声明
+#    - revive # golint 直接替代品
+    - sqlclosecheck  # bugs 检查 sql.Rows 和 sql.Stmt 是否已关闭 Can't create more than max_prepared_stmt_count statements (current value: 16382)
 
