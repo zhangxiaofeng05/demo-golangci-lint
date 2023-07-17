@@ -1,19 +1,26 @@
-## install golangci-lint
-https://golangci-lint.run/usage/install/#install-from-source
-
-## usage
-### Installation
+## 使用
+### curl 或者 wget 二选一
 |Method|Command|
 |----|----|
 |curl|`sh -c "$(curl -fsSL https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
 |wget|`sh -c "$(wget -O- https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
 
-more info. [install.sh](./install.sh)
+shell做的事：安装`golangci-lint`，下载`.golangci.yml`。
 
-### Manual lint
+手动执行lint的命令
 ```bash
-make lint
+golangci-lint run ./...
 ```
+如果使用Makefile，将下边的命令添加到Makefile中
+```makefile
+# lint
+lint:
+	@golangci-lint --version
+	@golangci-lint run ./...
+```
+
+## 依赖 golangci-lint
+https://golangci-lint.run/usage/install/#install-from-source
 
 ## QA
 Q: no lint specify code  
