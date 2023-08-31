@@ -6,3 +6,8 @@ git_hook:
 lint:
 	@golangci-lint --version
 	@golangci-lint run ./...
+
+format:
+	goimports -w .
+	gofmt -w .
+
