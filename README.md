@@ -25,7 +25,10 @@ lint:
 ```
 
 ## 依赖 golangci-lint
-https://golangci-lint.run/usage/install/#install-from-source
+https://golangci-lint.run/welcome/install/#install-from-source
+```
+go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+```
 
 ## QA
 Q: no lint specify code  
