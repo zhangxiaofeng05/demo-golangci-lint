@@ -44,6 +44,6 @@ linters:
     - nilerr # bugs 检查当 err 不为 nil 时返回 nil
 #    - noctx # bugs 检查函数是否使用上下文的context,应该用存在继承关系的context向下传递 **不启用
     - prealloc # performance 查找可能被预分配的切片声明
-    - revive # style  golint 的直接替代品
+    # - revive # style  golint 的直接替代品 暂时不用特别细致的统一代码风格` **不启用
     - rowserrcheck # bugs 检查sql.Rows.Err()
     - sqlclosecheck # bugs 检查sql.Rows.Close()
