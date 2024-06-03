@@ -3,10 +3,12 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/zhangxiaofeng05/com/db/commysql"
-	"github.com/zhangxiaofeng05/golangcilint/test/example"
 	"log"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jmoiron/sqlx"
+	"github.com/zhangxiaofeng05/com/db/com_mysql"
 )
 
 func init() {
@@ -15,13 +17,33 @@ func init() {
 }
 
 func main() {
-	halfDsn := commysql.GetEnv()
+	halfDsn := com_mysql.GetEnv()
 	dsn := fmt.Sprintf("%s/%s?parseTime=true", halfDsn, "testdb")
-	sqlxDB, err := commysql.Sqlx(dsn)
+	sqlxDB, err := com_mysql.Sqlx(dsn)
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer sqlxDB.Close()
 
+	ctx := context.Background()
+
+	//sqlClose(ctx, sqlxDB)
+
+	start(ctx, sqlxDB)
+}
+
+func sqlClose(ctx context.Context, sqlxDB *sqlx.DB) {
+	/**
+	查看数据库最大预编译数量：show variables like '%max_prepared_stmt_count%';
+	查看当前预编译数量和关闭数量：show global status like '%com_stmt%';
+	*/
+
+	for i := 0; i < 148; i++ {
+		sqlclosecheck(ctx, sqlxDB)
+	}
+}
+
+func start(ctx context.Context, sqlxDB *sqlx.DB) {
 	{
 		//错误检查 Error return value is not checked (errcheck)
 		errCheck()
@@ -42,11 +64,6 @@ func main() {
 	}
 
 	{
-		// 类型检查 typecheck - 看函数的测试代码
-		example.TypeCheck("typecheckParam")
-	}
-
-	{
 		//http响应body是否关闭 bodyclose
 		bodyclose()
 	}
@@ -63,19 +80,9 @@ func main() {
 	}
 
 	{
-		// 错误lint errorlint
-		errorlint()
-	}
-
-	{
-		// 循环引用 exportloopref
-		exportloopref()
-	}
-
-	{
 		// 检查源代码是否存在安全问题 gosec
 		gosec()
-		gosecGood()
+		//gosecGood()
 	}
 
 	{
@@ -98,7 +105,7 @@ func main() {
 
 	{
 		// 检查 sql.Rows 和 sql.Stmt 是否已关闭 sqlclosecheck
-		sqlclosecheck(sqlxDB)
+		//sqlclosecheck(ctx, sqlxDB)
 	}
 
 	log.Printf("hello")

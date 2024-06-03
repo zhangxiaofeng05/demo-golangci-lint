@@ -2,23 +2,35 @@ package main
 
 import (
 	"context"
-	"github.com/jmoiron/sqlx"
 	"log"
+
+	"github.com/jmoiron/sqlx"
 )
 
-func sqlclosecheck(sqlxDB *sqlx.DB) {
-	ctx := context.Background()
-	rows, err := sqlxDB.QueryxContext(ctx, "SELECT deptno FROM dept WHERE `dname` = ?", "SALES")
+type Dept struct {
+	DeptNo int    `json:"deptno"`
+	Dname  string `json:"dname"`
+	Loc    string `json:"loc"`
+}
+
+func sqlclosecheck(ctx context.Context, sqlxDB *sqlx.DB) {
+	rows, err := sqlxDB.QueryxContext(ctx, "SELECT * FROM dept WHERE `loc` = ?", "BOSTON")
 	if err != nil {
 		log.Fatal(err)
 	}
 	//defer rows.Close()
+	{
+		// 模拟发生错误，没有关闭就直接返回
+		return
+	}
+	var list = make([]Dept, 0, 30)
 	for rows.Next() {
-		var deptno int
-		err := rows.Scan(&deptno)
+		var dept Dept
+		err := rows.StructScan(&dept)
 		if err != nil {
 			log.Fatal(err)
 		}
-		log.Printf("deptno: %v", deptno)
+		list = append(list, dept)
 	}
+	log.Printf("list: %+v", list)
 }
