@@ -38,7 +38,7 @@ linters:
     - exportloopref # bugs 检查指向循环变量的指针
 #    - gocheckcompilerdirectives # bugs 检查//go:注释是否正确 **不启用
     - gosec # bugs 检查源代码是否存在安全问题
-    - gosmopolitan # bugs 检查是否使用不支持的语言特性
+    # - gosmopolitan # bugs i18n/l10n 目前不需要 **不启用
     - makezero # bugs 确保切片不会以非零长度初始化的 linter
 #    - musttag # bugs 在(un)marshaled结构体时，强制标识tag **不启用
     - nilerr # bugs 检查当 err 不为 nil 时返回 nil
