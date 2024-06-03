@@ -64,7 +64,7 @@ run_install() {
   golangci-lint --version
   # 检查 .golangci.yml
   if [ -e ".golangci.yml" ]; then
-    echo ".golangci.yml 文件存在，请手动获取进行更新指定内容或覆盖,忽略下载"
+    echo ".golangci.yml 文件存在，需要更新可执行更新脚本,忽略下载"
   else
     wget https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/.golangci.yml
   fi

@@ -1,9 +1,14 @@
-## 使用
-### curl 或者 wget 二选一
+## install
+安装
 |Method|Command|
 |----|----|
 |curl|`sh -c "$(curl -fsSL https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
-|wget|`sh -c "$(wget -O- https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)"`|
+
+## update
+更新
+|Method|Command|
+|----|----|
+|curl|`sh -c "$(curl -fsSL https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/install.sh)" -- update`|
 
 shell做的事：安装`golangci-lint`，下载`.golangci.yml`。
 
