@@ -32,19 +32,61 @@
 
 #echo "** ok, let us enjoy it!"
 
-# 检查 golangci-lint 是否存在
-if ! command -v golangci-lint &> /dev/null; then
-    echo "golangci-lint 未安装或未添加到系统 PATH 中"
+ACTION_INSTALL="install"
+ACTION_UPDATE="update"
+
+start() {
+  local action=$1
+  case "$action" in
+  "$ACTION_INSTALL")
+    run_install
+    ;;
+  "$ACTION_UPDATE")
+    run_update
+    ;;
+  *)
+    echo "missing action, default install"
+    run_install
+    ;;
+  esac
+}
+
+run_install() {
+  echo "start install"
+  # 检查 golangci-lint 是否存在
+  if
+    ! command -v golangci-lint &
+    >/dev/null
+  then
+    # echo "golangci-lint 未安装或未添加到系统 PATH 中"
     go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
-fi
-echo "golangci-lint 版本"
-golangci-lint --version
+  fi
+  golangci-lint --version
+  # 检查 .golangci.yml
+  if [ -e ".golangci.yml" ]; then
+    echo ".golangci.yml 文件存在，请手动获取进行更新指定内容或覆盖,忽略下载"
+  else
+    wget https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/.golangci.yml
+  fi
+  echo "手动 lint,不再使用git hooks, 将 golangci-lint run ./... 写入到 Makefile中"
+  echo "end install"
+}
 
-# 检查 .golangci.yml
-if [ -e ".golangci.yml" ]; then
-  echo ".golangci.yml 文件存在，请手动获取进行更新指定内容或覆盖,忽略下载"
-else
+run_update() {
+  echo "start update"
+  # echo "golangci-lint 未安装或未添加到系统 PATH 中"
+  go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest
+  golangci-lint --version
+  rm -rf .golangci.yml
   wget https://raw.githubusercontent.com/zhangxiaofeng05/demo-golangci-lint/main/.golangci.yml
-fi
+  echo "end update"
+}
 
-echo "手动 lint,不再使用git hooks, 将 golangci-lint run ./... 写入到 Makefile中"
+# 检查是否提供了参数
+# if [ $# -ne 1 ]; then
+# echo "Usage: $0 {install|update}"
+# exit 1
+# fi
+
+# 将命令行参数传递给函数
+start "$1"
