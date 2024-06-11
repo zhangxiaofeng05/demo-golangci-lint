@@ -47,3 +47,4 @@ linters:
     # - revive # style  golint 的直接替代品 暂时不用特别细致的统一代码风格` **不启用
     - rowserrcheck # bugs 检查sql.Rows.Err()
     - sqlclosecheck # bugs 检查sql.Rows.Close()
+    - forcetypeassert # style 检查强制类型转换

@@ -108,5 +108,9 @@ func start(ctx context.Context, sqlxDB *sqlx.DB) {
 		//sqlclosecheck(ctx, sqlxDB)
 	}
 
+	{
+		forcetypeassert()
+	}
+
 	log.Printf("hello")
 }
