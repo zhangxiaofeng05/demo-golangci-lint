@@ -1,50 +1,58 @@
-run:
-  # The default concurrency value is the number of available CPU.
-  concurrency: 8
-  timeout: 5m
-  # Which dirs to skip: issues from them won't be reported.
-  # Can use regexp here: `generated.*`, regexp is applied on full path.
-  # Default value is empty list,
-  # but default dirs are skipped independently of this option's value (see skip-dirs-use-default).
-  # "/" will be replaced by current OS file path separator to properly work on Windows.
-#  指定目录跳过 lint
-  skip-dirs:
-#    - src/external_libs
-#  指定文件跳过 lint
-  skip-files:
-#    - ".*\\.my\\.go$"
-#    - lib/bad.go
+version: "2"
 linters:
-  # Disable all linters.
-  # Default: false
-  disable-all: true
-  # Enable specific linter
-  # https://golangci-lint.run/usage/linters/#enabled-by-default
+  # Default set of linters.
+  # The value can be:
+  # - `standard`: https://golangci-lint.run/usage/linters/#enabled-by-default
+  # - `all`: enables all linters by default.
+  # - `none`: disables all linters by default.
+  # - `fast`: enables only linters considered as "fast" (`golangci-lint help linters --json | jq '[ .[] | select(.fast==true) ] | map(.name)'`).
+  # Default: standard
+  default: standard
+  # Enable specific linter.
   enable:
-    - errcheck # bugs 检查错误是否处理
-    - gosimple # style 简化代码
-    - govet # bugs go原生lint，没有示例
-    - ineffassign # unused 检测何时未使用对现有变量的赋值
-    - staticcheck # bugs 静态检查
-    # - unused # 检查未使用的函数，变量 **不启用 有的函数只有特定的情况才会使用
-    - asasalint # bugs 检查可变参数 func(...any) 中是否将 []any 传递为 any
-    - bidichk # bugs 检查危险的 unicode 字符序列
-    - bodyclose # bugs 检查HTTP响应体是否关闭成功
-    # - contextcheck # bugs 检查函数是否使用上下文的context,应该用存在继承关系的context向下传递 不启用 部分函数不使用context
-    - durationcheck # bugs 检查两个持续时间相乘
-    - errchkjson # bugs 检查传递给 json 编码函数的类型
-    - errorlint # bugs 用于查找会导致 Go 1.13 中引入的错误包装方案出现问题的代码
-    # - exhaustive # bugs 检查枚举 switch 语句的详尽性 不需要，只是为了注释 **不启用
-    - exportloopref # bugs 检查指向循环变量的指针
-    # - gocheckcompilerdirectives # bugs 检查//go:注释是否正确 **不启用
-    - gosec # bugs 检查源代码是否存在安全问题
-    # - gosmopolitan # bugs i18n/l10n 目前不需要 **不启用
-    - makezero # bugs 确保切片不会以非零长度初始化的 linter
-    # - musttag # bugs 在(un)marshaled结构体时，强制标识tag **不启用
-    - nilerr # bugs 检查当 err 不为 nil 时返回 nil
-    # - noctx # bugs 检查函数是否使用上下文的context,应该用存在继承关系的context向下传递 **不启用
-    - prealloc # performance 查找可能被预分配的切片声明
-    # - revive # style  golint 的直接替代品 暂时不用特别细致的统一代码风格` **不启用
-    - rowserrcheck # bugs 检查sql.Rows.Err()
-    - sqlclosecheck # bugs 检查sql.Rows.Close()
-    - forcetypeassert # style 检查强制类型转换
+    - errcheck # 用于检查 Go 代码中未检查错误的程序
+    - govet # 与 go vet 大致相同
+    - ineffassign # 检测现有变量的赋值何时未被使用
+    - staticcheck # 静态检查
+    - asasalint # 检查可变函数 (...any) 中传递 []any 为 any
+    - asciicheck # 检查所有代码标识符的名称中不包含非 ASCII 符号
+    - bidichk # 检查危险的 Unicode 字符序列
+    - bodyclose # 检查 HTTP 响应主体是否成功关闭
+    - copyloopvar # 检测循环变量被复制的位置
+    - dogsled # 检查具有过多空白标识符的赋值
+    - durationcheck # 检查两个持续时间是否相乘
+    - errchkjson # 检查传递给 JSON 编码函数的类型
+    - errorlint # 用于查找会导致 Go 1.13 中引入的错误包装方案出现问题的代码
+    - exhaustive # 检查枚举 switch 语句的详尽性
+    - exhaustruct # 检查所有结构字段是否已初始化
+    - exptostd # 检测 golang.org/x/exp/ 中可被 std 函数替换的函数
+    - forbidigo #  禁止标识符
+    - forcetypeassert # 查找强制类型断言
+    - gosec # 检查源代码是否存在安全问题
+    - makezero # 查找具有非零初始长度的切片声明
+    - nilerr # 查找即使检查错误不为 nil 也返回 nil 的代码
+    - nilnesserr # 报告构造检查 err != nil，但返回不同的 nil 值错误
+    - nilnil # 检查是否不同时返回 nil 错误和无效值
+    - nolintlint # 报告格式不正确或不充分的 nolint 指令
+    - perfsprint # 检查 fmt.Sprintf 是否可以被更快的替代方案取代
+    - prealloc # 查找可能预先分配的切片声明
+    #    - revive # 快速、可配置、可扩展、灵活且美观的 Go 语言代码检查器。golint 的直接替代品 ** 不启用
+    - rowserrcheck # 检查行的 Rows.Err 是否检查成功
+    - sqlclosecheck # 检查 sql.Rows、sql.Stmt、sqlx.NamedStmt、pgx.Query 是否已关闭
+    - testifylint # 检查 github.com/stretchr/testify 的使用情况
+    - unconvert # 删除不必要的类型转换
+    - usestdlibvars # 检测使用 Go 标准库中的变量/常量的可能性的 linter
+    - wastedassign # 查找浪费的赋值语句
+  settings:
+    gosec:
+      includes:
+        - G102
+        - G106
+        - G108
+        - G109
+        - G111
+        - G112
+        - G201
+        - G203
+  disable:
+    - unused

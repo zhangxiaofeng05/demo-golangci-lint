@@ -21,16 +21,17 @@ func sqlclosecheck(ctx context.Context, sqlxDB *sqlx.DB) {
 	//defer rows.Close()
 	{
 		// 模拟发生错误，没有关闭就直接返回
+		_ = rows
 		return
 	}
-	var list = make([]Dept, 0, 30)
-	for rows.Next() {
-		var dept Dept
-		err := rows.StructScan(&dept)
-		if err != nil {
-			log.Fatal(err)
-		}
-		list = append(list, dept)
-	}
-	log.Printf("list: %+v", list)
+	//var list = make([]Dept, 0, 30)
+	//for rows.Next() {
+	//	var dept Dept
+	//	err := rows.StructScan(&dept)
+	//	if err != nil {
+	//		log.Fatal(err)
+	//	}
+	//	list = append(list, dept)
+	//}
+	//log.Printf("list: %+v", list)
 }

@@ -23,7 +23,12 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer sqlxDB.Close()
+	defer func() {
+		err = sqlxDB.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	ctx := context.Background()
 
@@ -110,6 +115,10 @@ func start(ctx context.Context, sqlxDB *sqlx.DB) {
 
 	{
 		forcetypeassert()
+	}
+
+	{
+		exhaustruct() // 检查所有结构字段是否已初始化
 	}
 
 	log.Printf("hello")
